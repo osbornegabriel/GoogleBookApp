@@ -2,7 +2,7 @@ body{
   padding: 2%;
   color: #cc6600;
   text-shadow: .25px .25px yellow, .6px .6px white;
-  background-image: url("pipe.jpg");
+  background-image: url(asset_path('pipe.jpg'));
   background-size: 100% auto;
   font-size: 20px;
 }
