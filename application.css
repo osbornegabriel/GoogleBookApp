@@ -2,7 +2,7 @@ body{
   padding: 2%;
   color: #cc6600;
   text-shadow: .25px .25px yellow, .6px .6px white;
-  background-image: url("pipe.jpg");
+  background-image: url("images/pipe.jpg");
   background-size: 100% auto;
   font-size: 20px;
 }
@@ -33,4 +33,10 @@ h1{
   margin: 0;
   border-bottom: .5px solid black;
   border-right: .5px solid black;
+}
+
+.title{
+  color: black;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
 }
