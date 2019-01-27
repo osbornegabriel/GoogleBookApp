@@ -2,9 +2,11 @@ body{
   padding: 2%;
   color: #cc6600;
   text-shadow: .25px .25px yellow, .6px .6px white;
+  font-size: 20px;
   background-image: url("images/pipe.jpg");
   background-size: 100% auto;
-  font-size: 20px;
+  background-attachment: fixed;
+  overscroll-behavior-y: none;
 }
 
 h1{
