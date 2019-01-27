@@ -1,8 +1,11 @@
+var bookSearch;
+var formatBookInfo;
+
 $(document).ready(function(){
   bookSearch();
 })
 
-var bookSearch = function(){
+bookSearch = function(){
   $('#button').on('click', function(e){
     var search = $('#search').val();
     $.ajax({
@@ -18,11 +21,16 @@ var bookSearch = function(){
   })
 }
 
-var formatBookInfo = function(item){
-  var info = "<h3 class='title'><em>" + item.title + "</em></h3>";
+// var handleJson = function(){
+
+// }
+
+formatBookInfo = function(item){
+  var info = "<h3><span class='title'>" + item.title + "</span></h3>";
   info += "<p><strong>Author:</strong> " + item.authors;
   info += "<br><strong>Publisher:</strong> " + item.publisher;
-  info += "<br><a target='_blank' href='" + item.infoLink + "'>More Info</a></p>";
-  info += "<img class='thumbnail' src='" + item.imageLinks.smallThumbnail + "'>"
+  info += "<br><a target='_blank' href='" + item.infoLink + "'>";
+  info += "<br><img class='thumbnail' src='" + item.imageLinks.smallThumbnail + "'></a>";
+  info += "</p>";
   return info;
 }

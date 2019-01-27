@@ -7,15 +7,17 @@
   <script src="application.js"></script>
 </head>
 <body>
-  <h1 class="header">Sherlock's Library</h1>
-  <p>Welcome to Sherlock's Library, where we find the books you're looking for.<br> What title would you like to look up today?</p>
+  <h1><span class="header">Sherlock's Library</span></h1>
+  <p><span class="text">Welcome to Sherlock's Library, where we find the books you're looking for.<br> What title would you like to look up today?</span></p>
   <div class="tab-bar">
-    <a class="tab-link" class="selected">Title</a>
-    <a class="tab-link">Author</a>
+    <p><br>
+      <a class="tab-link" class="selected">Title</a>
+      <a class="tab-link">Author</a>
+    </p>
   </div>
   <div class="search-bar">
-    <input id="search" placeholder="search">
-    <button id="button" type="button">Click Me</button>
+    <input id="search" placeholder="Book Title">
+    <button id="button" type="button">Search</button>
   </div>
   <div id="results"></div>
 </body>

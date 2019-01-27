@@ -1,4 +1,5 @@
 body{
+  margin: auto;
   padding: 2%;
   color: #cc6600;
   text-shadow: .25px .25px yellow, .6px .6px white;
@@ -9,9 +10,19 @@ body{
   overscroll-behavior-y: none;
 }
 
-h1{
-  text-shadow: 1px 1px white;
+.header,
+.title{
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  /*color: #459BB4;*/
+  color: #427483;
+  background-color: rgba(255,255,255,.25);
+  text-shadow: .25px .25px blue, .6px .6px black;
+  text-decoration: underline;
 }
+/*{
+  text-shadow: 1px 1px white;
+}*/
 
 .tab-bar{
 }
@@ -37,8 +48,7 @@ h1{
   border-right: .5px solid black;
 }
 
-.title{
-  color: black;
-  margin-bottom: 0px;
-  padding-bottom: 0px;
+p{
+  display: inline;
+  background-color: rgba(255,255,255,.5);
 }
