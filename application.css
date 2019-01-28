@@ -38,12 +38,17 @@ h3{
 .tab-bar{
 }
 
+#active-search,
 .tab-link:hover{
   background-color: #ccd9ff;
   border-bottom: 0;
   border-right: 0;
   border-left: .5px solid black;
   border-top: .5px solid black;
+}
+
+.tab-link:hover{
+  background-color: #e7e7da;
 }
 
 .tab-link{

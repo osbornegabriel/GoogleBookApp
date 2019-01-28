@@ -15,6 +15,7 @@ var bookImage;
 
 $(document).ready(function(){
   searchListeners();
+  setActiveSearch();
 })
 
 
@@ -37,9 +38,18 @@ bookSearch = function(){
   })
 }
 
+var setActiveSearch = function(){
+  $('.tab-link').on('click', function(e){
+    console.log('active search script');
+    $('#active-search').removeAttr('id');
+    console.log(this);
+    $(this).attr('id','active-search');
+  })
+}
+
 apiCall = function(search){
   console.log("Grabbing search info");
-  var callType = $('#activeSearch').text();
+  var callType = $('#active-search').text();
   console.log(callType);
   return $.ajax({
     method: 'GET',
