@@ -38,6 +38,9 @@ bookSearch = function(){
 }
 
 apiCall = function(search){
+  console.log("Grabbing search info");
+  var callType = $('#activeSearch').text();
+  console.log(callType);
   return $.ajax({
     method: 'GET',
     url: "https://www.googleapis.com/books/v1/volumes?q=" + search,
