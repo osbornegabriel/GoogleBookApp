@@ -11,11 +11,13 @@ var bookInfoAndCover;
 var authorLine;
 var titleLine;
 var bookImage;
+var styleSearch;
+var searchFormat;
 
 
 $(document).ready(function(){
-  searchListeners();
   setActiveSearch();
+  searchListeners();
 })
 
 
@@ -40,22 +42,34 @@ bookSearch = function(){
 
 var setActiveSearch = function(){
   $('.tab-link').on('click', function(e){
-    console.log('active search script');
     $('#active-search').removeAttr('id');
-    console.log(this);
     $(this).attr('id','active-search');
   })
 }
 
 apiCall = function(search){
-  console.log("Grabbing search info");
-  var callType = $('#active-search').text();
-  console.log(callType);
   return $.ajax({
     method: 'GET',
-    url: "https://www.googleapis.com/books/v1/volumes?q=" + search,
+    url: "https://www.googleapis.com/books/v1/volumes?q=" + searchFormat() + styleSearch(search),
     datatype: "json"
   })
+}
+
+styleSearch = function(search){
+  return search.replace(' ', '+');
+}
+
+searchFormat = function(){
+  var callType = $('#active-search').text();
+  switch(callType){
+    case 'General':
+      return '';
+    case 'Title':
+      return 'intitle:';
+    case 'Author':
+      return "inauthor:";
+  }
+  return '';
 }
 
 resetResults = function(){
