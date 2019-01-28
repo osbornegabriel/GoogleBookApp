@@ -13,6 +13,8 @@ var titleLine;
 var bookImage;
 var styleSearch;
 var searchFormat;
+var noResults;
+var setActiveSearch;
 
 
 $(document).ready(function(){
@@ -36,11 +38,15 @@ bookSearch = function(){
   var search = $('#search').val();
   apiCall(search).done(function(response){
     resetResults();
-    showBookInfo(response);
+    response.totalItems > 0 ? showBookInfo(response) : noResults(search);
   })
 }
 
-var setActiveSearch = function(){
+noResults = function(query){
+  $('#results').append("<p>No Results Found</p>");
+}
+
+setActiveSearch = function(){
   $('.tab-link').on('click', function(e){
     $('#active-search').removeAttr('id');
     $(this).attr('id','active-search');
