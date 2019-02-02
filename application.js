@@ -16,6 +16,7 @@ var searchFormat;
 var noResults;
 var setActiveSearch;
 var secureContent;
+var validSearch;
 
 
 $(document).ready(function(){
@@ -37,10 +38,12 @@ searchListeners = function(){
 
 bookSearch = function(){
   var search = $('#search').val();
-  apiCall(search).done(function(response){
-    resetResults();
-    response.totalItems > 0 ? showBookInfo(response) : noResults(search);
-  })
+  if (validSearch(search)){
+    apiCall(search).done(function(response){
+      resetResults();
+      response.totalItems > 0 ? showBookInfo(response) : noResults(search);
+    })
+  }
 }
 
 noResults = function(query){
@@ -137,4 +140,9 @@ bookImage = function(book){
 
 secureContent = function(webAddress){
   return webAddress.replace("http://", "https://");
+}
+
+validSearch = function(search){
+  var re = /\S/;
+  return re.test(search);
 }
