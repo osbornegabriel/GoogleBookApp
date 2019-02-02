@@ -41,7 +41,7 @@ bookSearch = function(){
   if (validSearch(search)){
     apiCall(search).done(function(response){
       resetResults();
-      response.totalItems > 0 ? showBookInfo(response) : noResults(search);
+      response.totalItems > 0 ? showResults(response) : noResults(search);
     })
   }
 }
@@ -60,9 +60,14 @@ setActiveSearch = function(){
 apiCall = function(search){
   return $.ajax({
     method: 'GET',
-    url: "https://www.googleapis.com/books/v1/volumes?q=" + searchFormat() + styleSearch(search),
+    url: "https://www.googleapis.com/books/v1/volumes?q=" + searchFormat() + styleSearch(search) + resultsIndex(),
     datatype: "json"
   })
+}
+
+var resultsIndex = function(){
+  var page = String(0);
+  return "&startIndex=" + page;
 }
 
 styleSearch = function(search){
@@ -84,6 +89,17 @@ searchFormat = function(){
 
 resetResults = function(){
   $('#results').text('');
+}
+
+var showResults = function(bookList){
+  showBookInfo(bookList);
+  updateResultsIndex();
+}
+
+var updateResultsIndex = function(){
+  var index = $('#results-index').attr('data-index');
+  console.log(index);
+  $('#results-index').append("<p>Page " + index + " of Results</p>");
 }
 
 showBookInfo = function(bookList){
