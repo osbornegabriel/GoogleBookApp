@@ -15,6 +15,7 @@ var styleSearch;
 var searchFormat;
 var noResults;
 var setActiveSearch;
+var secureContent;
 
 
 $(document).ready(function(){
@@ -131,5 +132,9 @@ titleLine = function(book){
 bookImage = function(book){
   var link = book.imageLinks;
   var picture = link ? link.smallThumbnail : false;
-  return picture ? "<img class='thumbnail' src='" + picture + "'>" : "Click for Info";
+  return picture ? "<img class='thumbnail' src='" + secureContent(picture) + "'>" : "Click for Info";
+}
+
+secureContent = function(webAddress){
+  return webAddress.replace("http://", "https://");
 }
