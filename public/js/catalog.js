@@ -35,11 +35,18 @@ var SearchCatalog = function(){
 
   function updateBookSearch(){
     var search = $('#search').val();
-    if (helper.validSearch(search)){
-      apiHandler.gbookSearch(search).done(function(response){
-        resetResults();
-        response.totalItems > 0 ? showResults(response) : noResults(search);
-      })
+    try {
+      if (helper.validSearch(search)){
+        apiHandler.gbookSearch(search).done(function(response){
+          resetResults();
+          response.totalItems > 0 ? showResults(response) : noResults(search);
+        }).fail(function(failResponse){
+          console.log("Error: Google API did not respond with book data");
+          console.log("Response: " + failResponse);
+        })
+      }
+    } catch {
+      console.log("Error: Api call failed");
     }
   }
 
