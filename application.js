@@ -23,6 +23,7 @@ $(document).ready(function(){
   setActiveSearch();
   searchListeners();
   scrollNext();
+  scrollPrevious();
 })
 
 
@@ -120,6 +121,17 @@ var scrollNext = function(){
     console.log("Next button clicked");
     var index = $('#results-index').attr('data-index');
     index = parseInt(index) + 10;
+    $('#results-index').attr('data-index', index);
+    bookSearch();
+    $(window).scrollTop(0); // need to come back to this, so scrollTop doesn't not resolve prior to the booksearch being updated
+  })
+}
+
+var scrollPrevious = function(){
+  $('#results-scroll').on('click', '.previous', function(e){
+    console.log("Previous button clicked");
+    var index = $('#results-index').attr('data-index');
+    index = parseInt(index) - 10;
     $('#results-index').attr('data-index', index);
     bookSearch();
     $(window).scrollTop(0); // need to come back to this, so scrollTop doesn't not resolve prior to the booksearch being updated
