@@ -11,7 +11,16 @@ var scrollNext;
 var scrollPrevious;
 var resultsIndex;
 var showResults;
+var showBookInfo;
 
+showBookInfo = function(bookList){
+  var book;
+  for(i = 0; i < bookList.items.length; i++){
+    bookInfo = bookList.items[i].volumeInfo;
+    book = new Book(bookInfo)
+    $('#results').append(book.blurb);
+  }
+}
 
 resultsIndex = function(){
   var page = $('#results-index').attr('data-index')
