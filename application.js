@@ -17,6 +17,12 @@ var noResults;
 var setActiveSearch;
 var secureContent;
 var validSearch;
+var showResults;
+var resultsIndex;
+var updateResultsIndex;
+var updateResultsScroll;
+var scrollNext;
+var scrollPrevious;
 
 
 $(document).ready(function(){
@@ -52,10 +58,16 @@ noResults = function(query){
   $('#results').append("<p>No Results Found</p>");
 }
 
+var resetSearchIndex = function(){
+  $('#results-index').attr('data-index', 0);
+}
+
 setActiveSearch = function(){
   $('.tab-link').on('click', function(e){
     $('#active-search').removeAttr('id');
     $(this).attr('id','active-search');
+    resetSearchIndex();
+    bookSearch();
   })
 }
 
@@ -67,7 +79,7 @@ apiCall = function(search){
   })
 }
 
-var resultsIndex = function(){
+resultsIndex = function(){
   var page = $('#results-index').attr('data-index')
   return "&startIndex=" + page;
 }
@@ -93,18 +105,19 @@ resetResults = function(){
   $('#results').text('');
 }
 
-var showResults = function(bookList){
+showResults = function(bookList){
   showBookInfo(bookList);
   updateResultsIndex();
   updateResultsScroll(bookList.totalItems);
 }
 
-var updateResultsIndex = function(){
+updateResultsIndex = function(){
   var index = $('#results-index').attr('data-index');
-  $('#results-index').html("<p>Page " + index + " of Results</p>");
+  var indexInfo = (index / 10) + 1;
+  $('#results-index').html("<p>Page " + indexInfo + " of Results</p>");
 }
 
-var updateResultsScroll = function(totalResults){
+updateResultsScroll = function(totalResults){
   var indexTabs = '';
   var index = $('#results-index').attr('data-index');
   if (index > 0){
@@ -116,7 +129,7 @@ var updateResultsScroll = function(totalResults){
   $('#results-scroll').html(indexTabs);
 }
 
-var scrollNext = function(){
+scrollNext = function(){
   $('#results-scroll').on('click', '.next', function(e){
     console.log("Next button clicked");
     var index = $('#results-index').attr('data-index');
@@ -127,7 +140,7 @@ var scrollNext = function(){
   })
 }
 
-var scrollPrevious = function(){
+scrollPrevious = function(){
   $('#results-scroll').on('click', '.previous', function(e){
     console.log("Previous button clicked");
     var index = $('#results-index').attr('data-index');
