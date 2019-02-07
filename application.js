@@ -22,11 +22,12 @@ var validSearch;
 $(document).ready(function(){
   setActiveSearch();
   searchListeners();
+  scrollNext();
 })
 
 
 searchListeners = function(){
-  $('#button').on('click', function(e){
+  $('#search-button').on('click', function(e){
     bookSearch();
   })
   $('#search').on('keypress',function(e){
@@ -106,12 +107,23 @@ var updateResultsScroll = function(totalResults){
   var indexTabs = '';
   var index = $('#results-index').attr('data-index');
   if (index > 0){
-    indexTabs += "<Button>Previous</Button>";
+    indexTabs += "<button class='previous'>Previous</button>";
   }
   if (index < (totalResults - 10)){
-    indexTabs += "<button>Next</button>";
+    indexTabs += "<button class='next'>Next</button>";
   }
   $('#results-scroll').html(indexTabs);
+}
+
+var scrollNext = function(){
+  $('#results-scroll').on('click', '.next', function(e){
+    console.log("Next button clicked");
+    var index = $('#results-index').attr('data-index');
+    index = parseInt(index) + 10;
+    $('#results-index').attr('data-index', index);
+    bookSearch();
+    $(window).scrollTop(0); // need to come back to this, so scrollTop doesn't not resolve prior to the booksearch being updated
+  })
 }
 
 showBookInfo = function(bookList){
