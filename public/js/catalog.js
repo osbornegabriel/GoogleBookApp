@@ -12,23 +12,19 @@ var SearchCatalog = function(){
   }
 
   this.scrollNext = function(){
-    $('#results-scroll').on('click', '.next', function(e){
-      var index = $('#results-index').attr('data-index');
-      index = parseInt(index) + 10;
-      $('#results-index').attr('data-index', index);
-      updateBookSearch();
-      $(window).scrollTop(0); // need to come back to this, so scrollTop doesn't not resolve prior to the booksearch being updated
-    })
+    scroll(10);
   }
 
   this.scrollPrevious = function(){
-    $('#results-scroll').on('click', '.previous', function(e){
+    scroll(-10);
+  }
+
+  function scroll(indexChange){
       var index = $('#results-index').attr('data-index');
-      index = parseInt(index) - 10;
-      $('#results-index').attr('data-index', index);
+      newIndex = parseInt(index) + indexChange;
+      $('#results-index').attr('data-index', newIndex);
       updateBookSearch();
-      $(window).scrollTop(0); // need to come back to this, so scrollTop doesn't not resolve prior to the booksearch being updated
-    })
+      scrollTop();// need to come back to this, so scrollTop doesn't not resolve prior to the booksearch being updated
   }
 
   function setActiveSearch(searchChoice){

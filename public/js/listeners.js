@@ -25,8 +25,20 @@ var Listeners = function(){
   }
 
   scrollListeners = function(){
-    catalog.scrollNext();
-    catalog.scrollPrevious();
+    scrollNextListener();
+    scrollPreviousListener();
+  }
+
+  scrollNextListener = function(){
+    $('#results-scroll').on('click', '.next', function(e){
+      catalog.scrollNext();
+    })
+  }
+
+  scrollPreviousListener = function(){
+    $('#results-scroll').on('click', '.previous', function(e){
+      catalog.scrollPrevious();
+    })
   }
 
 }
