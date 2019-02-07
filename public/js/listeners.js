@@ -20,7 +20,7 @@ var Listeners = function(){
 
   searchTypeListener = function(){
     $('.tab-link').on('click', function(e){
-      catalog.setActiveSearch(this);
+      catalog.changeSearchType(this);
     })
   }
 

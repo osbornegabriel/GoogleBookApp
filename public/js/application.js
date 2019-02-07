@@ -5,7 +5,6 @@ var catalog = new SearchCatalog();
 var listeners = new Listeners();
 
 $(document).ready(function(){
-  // catalog.setActiveSearch();
   listeners.setListeners();
 })
 

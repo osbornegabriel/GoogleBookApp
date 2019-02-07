@@ -5,25 +5,8 @@ var SearchCatalog = function(){
     updateBookSearch();
   }
 
-  var updateBookSearch = function(){
-    var search = $('#search').val();
-    if (validSearch(search)){
-      apiHandler.gbookSearch(search).done(function(response){
-        resetResults();
-        response.totalItems > 0 ? showResults(response) : noResults(search);
-      })
-    }
-  }
-
-  var showResults = function(bookList){
-    showBooklistInfo(bookList);
-    updateResultsIndex();
-    updateResultsScroll(bookList.totalItems);
-  }
-
-  this.setActiveSearch = function(searchChoice){
-    $('#active-search').removeAttr('id');
-    $(searchChoice).attr('id','active-search');
+  this.changeSearchType = function(newType){
+    setActiveSearch(newType);
     resetSearchIndex();
     updateBookSearch();
   }
@@ -48,7 +31,28 @@ var SearchCatalog = function(){
     })
   }
 
-  var showBooklistInfo = function(bookList){
+  function setActiveSearch(searchChoice){
+    $('#active-search').removeAttr('id');
+    $(searchChoice).attr('id','active-search');
+  }
+
+  function updateBookSearch(){
+    var search = $('#search').val();
+    if (validSearch(search)){
+      apiHandler.gbookSearch(search).done(function(response){
+        resetResults();
+        response.totalItems > 0 ? showResults(response) : noResults(search);
+      })
+    }
+  }
+
+  function showResults(bookList){
+    showBooklistInfo(bookList);
+    updateResultsIndex();
+    updateResultsScroll(bookList.totalItems);
+  }
+
+  function showBooklistInfo(bookList){
     var book;
     for(i = 0; i < bookList.items.length; i++){
       bookInfo = bookList.items[i].volumeInfo;
@@ -57,19 +61,19 @@ var SearchCatalog = function(){
     }
   }
 
-  var resetResults = function(){
+  function resetResults(){
     $('#results').text('');
   }
 
-  var noResults = function(query){
+  function noResults(query){
     $('#results').append("<p>No Results Found</p>");
   }
 
-  var resetSearchIndex = function(){
+  function resetSearchIndex(){
     $('#results-index').attr('data-index', 0);
   }
 
-  var updateResultsScroll = function(totalResults){
+  function updateResultsScroll(totalResults){
     var indexTabs = '';
     var index = $('#results-index').attr('data-index');
     if (index > 0){
@@ -81,7 +85,7 @@ var SearchCatalog = function(){
     $('#results-scroll').html(indexTabs);
   }
 
-  updateResultsIndex = function(){
+  function updateResultsIndex(){
     var index = $('#results-index').attr('data-index');
     var indexInfo = (index / 10) + 1;
     $('#results-index').html("<p>Page " + indexInfo + " of Results</p>");

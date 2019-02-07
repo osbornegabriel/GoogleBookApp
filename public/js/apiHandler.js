@@ -4,7 +4,7 @@ var ApiHandler = function(){
     return apiCall(search);
   }
 
-  apiCall = function(search){
+  function apiCall(search){
     return $.ajax({
       method: 'GET',
       url: "https://www.googleapis.com/books/v1/volumes?q=" + searchFormat() + styleSearch(search) + resultsIndex(),
@@ -12,7 +12,7 @@ var ApiHandler = function(){
     })
   }
 
-  searchFormat = function(){
+  function searchFormat(){
     var callType = $('#active-search').text();
     switch(callType){
       case 'General':
@@ -25,11 +25,11 @@ var ApiHandler = function(){
     return '';
   }
 
-  styleSearch = function(search){
+  function styleSearch(search){
     return search.replace(' ', '+');
   }
 
-  resultsIndex = function(){
+  function resultsIndex(){
     var page = $('#results-index').attr('data-index')
     return "&startIndex=" + page;
   }
