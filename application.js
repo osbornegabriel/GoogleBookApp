@@ -66,7 +66,7 @@ apiCall = function(search){
 }
 
 var resultsIndex = function(){
-  var page = String(0);
+  var page = $('#results-index').attr('data-index')
   return "&startIndex=" + page;
 }
 
@@ -94,12 +94,24 @@ resetResults = function(){
 var showResults = function(bookList){
   showBookInfo(bookList);
   updateResultsIndex();
+  updateResultsScroll(bookList.totalItems);
 }
 
 var updateResultsIndex = function(){
   var index = $('#results-index').attr('data-index');
-  console.log(index);
-  $('#results-index').append("<p>Page " + index + " of Results</p>");
+  $('#results-index').html("<p>Page " + index + " of Results</p>");
+}
+
+var updateResultsScroll = function(totalResults){
+  var indexTabs = '';
+  var index = $('#results-index').attr('data-index');
+  if (index > 0){
+    indexTabs += "<Button>Previous</Button>";
+  }
+  if (index < (totalResults - 10)){
+    indexTabs += "<button>Next</button>";
+  }
+  $('#results-scroll').html(indexTabs);
 }
 
 showBookInfo = function(bookList){
