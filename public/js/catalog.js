@@ -1,7 +1,24 @@
 var SearchCatalog = function(){
+  var apiHandler = new ApiHandler();
 
   this.bookSearch = function(){
     updateBookSearch();
+  }
+
+  var updateBookSearch = function(){
+    var search = $('#search').val();
+    if (validSearch(search)){
+      apiHandler.gbookSearch(search).done(function(response){
+        resetResults();
+        response.totalItems > 0 ? showResults(response) : noResults(search);
+      })
+    }
+  }
+
+  var showResults = function(bookList){
+    showBooklistInfo(bookList);
+    updateResultsIndex();
+    updateResultsScroll(bookList.totalItems);
   }
 
   this.setActiveSearch = function(searchChoice){
@@ -31,30 +48,6 @@ var SearchCatalog = function(){
     })
   }
 
-  var updateBookSearch = function(){
-    var search = $('#search').val();
-    if (validSearch(search)){
-      apiCall(search).done(function(response){
-        resetResults();
-        response.totalItems > 0 ? showResults(response) : noResults(search);
-      })
-    }
-  }
-
-  apiCall = function(search){
-    return $.ajax({
-      method: 'GET',
-      url: "https://www.googleapis.com/books/v1/volumes?q=" + catalog.searchFormat() + catalog.styleSearch(search) + catalog.resultsIndex(),
-      datatype: "json"
-    })
-  }
-
-  var showResults = function(bookList){
-    showBooklistInfo(bookList);
-    updateResultsIndex();
-    updateResultsScroll(bookList.totalItems);
-  }
-
   var showBooklistInfo = function(bookList){
     var book;
     for(i = 0; i < bookList.items.length; i++){
@@ -64,30 +57,8 @@ var SearchCatalog = function(){
     }
   }
 
-  this.resultsIndex = function(){
-    var page = $('#results-index').attr('data-index')
-    return "&startIndex=" + page;
-  }
-
-  this.styleSearch = function(search){
-    return search.replace(' ', '+');
-  }
-
   var resetResults = function(){
     $('#results').text('');
-  }
-
-  this.searchFormat = function(){
-    var callType = $('#active-search').text();
-    switch(callType){
-      case 'General':
-        return '';
-      case 'Title':
-        return 'intitle:';
-      case 'Author':
-        return "inauthor:";
-    }
-    return '';
   }
 
   var noResults = function(query){
