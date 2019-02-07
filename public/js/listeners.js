@@ -7,6 +7,11 @@ var Listeners = function(){
     searchTypeListener();
   }
 
+  scrollListeners = function(){
+    scrollNextListener();
+    scrollPreviousListener();
+  }
+
   searchListeners = function(){
     $('#search-button').on('click', function(e){
       catalog.bookSearch();
@@ -22,11 +27,6 @@ var Listeners = function(){
     $('.tab-link').on('click', function(e){
       catalog.changeSearchType(this);
     })
-  }
-
-  scrollListeners = function(){
-    scrollNextListener();
-    scrollPreviousListener();
   }
 
   scrollNextListener = function(){

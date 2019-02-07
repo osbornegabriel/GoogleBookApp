@@ -1,5 +1,6 @@
 var SearchCatalog = function(){
   var apiHandler = new ApiHandler();
+  var helper = new Helpers();
 
   this.bookSearch = function(){
     updateBookSearch();
@@ -24,7 +25,7 @@ var SearchCatalog = function(){
       newIndex = parseInt(index) + indexChange;
       $('#results-index').attr('data-index', newIndex);
       updateBookSearch();
-      scrollTop();// need to come back to this, so scrollTop doesn't not resolve prior to the booksearch being updated
+      helper.scrollTop();// need to come back to this, so scrollTop doesn't not resolve prior to the booksearch being updated
   }
 
   function setActiveSearch(searchChoice){
@@ -34,7 +35,7 @@ var SearchCatalog = function(){
 
   function updateBookSearch(){
     var search = $('#search').val();
-    if (validSearch(search)){
+    if (helper.validSearch(search)){
       apiHandler.gbookSearch(search).done(function(response){
         resetResults();
         response.totalItems > 0 ? showResults(response) : noResults(search);
@@ -48,6 +49,14 @@ var SearchCatalog = function(){
     updateResultsScroll(bookList.totalItems);
   }
 
+  function noResults(query){
+    resetResults();
+    resetResultsIndex();
+    resetSearchIndex();
+    resetResultsScroll();
+    $('#results').append("<p>No Results Found</p>");
+  }
+
   function showBooklistInfo(bookList){
     var book;
     for(i = 0; i < bookList.items.length; i++){
@@ -58,15 +67,19 @@ var SearchCatalog = function(){
   }
 
   function resetResults(){
-    $('#results').text('');
+    helper.reset('#results');
   }
 
-  function noResults(query){
-    $('#results').append("<p>No Results Found</p>");
+  function resetResultsIndex(){
+    helper.reset('#results-index');
   }
 
   function resetSearchIndex(){
     $('#results-index').attr('data-index', 0);
+  }
+
+  function resetResultsScroll(){
+    helper.reset('#results-scroll');
   }
 
   function updateResultsScroll(totalResults){

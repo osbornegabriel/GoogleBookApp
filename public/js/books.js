@@ -1,4 +1,6 @@
 var Book = function(bookInfo){
+  var helper = new Helpers();
+
   this.blurb = formatBookInfo(bookInfo);
 
   function formatBookInfo(item){
@@ -18,7 +20,7 @@ var Book = function(bookInfo){
   }
 
   function publisherLine(book){
-    return "<br><strong>Publisher:</strong> " + infoCheck(book.publisher);
+    return "<br><strong>Publisher:</strong> " + helper.infoCheck(book.publisher);
   }
 
   function bookInfoAndCover(book){
@@ -26,18 +28,18 @@ var Book = function(bookInfo){
   }
 
   function authorLine(book){
-    return "<strong>Author:</strong> " + infoCheck(book.authors);
+    return "<strong>Author:</strong> " + helper.infoCheck(book.authors);
   }
 
   function titleLine(book){
-    var title = infoCheck(book.title);
+    var title = helper.infoCheck(book.title);
     return "<h3><span class='title'>" + title + "</span></h3>"
   }
 
   function bookImage(book){
     var link = book.imageLinks;
     var picture = link ? link.smallThumbnail : false;
-    return picture ? "<img class='thumbnail' src='" + secureContent(picture) + "'>" : "Click for Info";
+    return picture ? "<img class='thumbnail' src='" + helper.secureContent(picture) + "'>" : "Click for Info";
   }
 
 }
