@@ -23,6 +23,7 @@ var updateResultsIndex;
 var updateResultsScroll;
 var scrollNext;
 var scrollPrevious;
+var resetSearchIndex;
 
 
 $(document).ready(function(){
@@ -58,7 +59,7 @@ noResults = function(query){
   $('#results').append("<p>No Results Found</p>");
 }
 
-var resetSearchIndex = function(){
+resetSearchIndex = function(){
   $('#results-index').attr('data-index', 0);
 }
 
