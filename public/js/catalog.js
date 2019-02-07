@@ -41,7 +41,7 @@ var SearchCatalog = function(){
           resetResults();
           response.totalItems > 0 ? showResults(response) : noResults(search);
         }).fail(function(failResponse){
-          console.log("Google API did not respond with book data");
+          console.log("Error: Google API did not respond with book data");
           console.log("Response: " + failResponse);
         })
       }
