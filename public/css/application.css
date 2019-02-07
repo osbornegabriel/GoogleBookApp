@@ -4,7 +4,7 @@ body{
   color: #cc6600;
   text-shadow: .25px .25px yellow, .6px .6px white;
   font-size: 20px;
-  background-image: url("images/pipe.jpg");
+  background-image: url("../../images/pipe.jpg");
   background-size: 100% auto;
   background-attachment: fixed;
   overscroll-behavior-y: none;
