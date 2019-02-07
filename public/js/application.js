@@ -1,35 +1,13 @@
-var searchListeners;
-var apiCall;
 var infoCheck;
 var secureContent;
 var validSearch;
-
+var catalog = new SearchCatalog();
+var listeners = new Listeners();
 
 $(document).ready(function(){
-  setActiveSearch();
-  searchListeners();
-  scrollNext();
-  scrollPrevious();
+  // catalog.setActiveSearch();
+  listeners.setListeners();
 })
-
-searchListeners = function(){
-  $('#search-button').on('click', function(e){
-    bookSearch();
-  })
-  $('#search').on('keypress',function(e){
-    if(e.which == 13){
-      bookSearch();
-    }
-  })
-}
-
-apiCall = function(search){
-  return $.ajax({
-    method: 'GET',
-    url: "https://www.googleapis.com/books/v1/volumes?q=" + searchFormat() + styleSearch(search) + resultsIndex(),
-    datatype: "json"
-  })
-}
 
 infoCheck = function(info){
   return info ? info : "Not Available";
