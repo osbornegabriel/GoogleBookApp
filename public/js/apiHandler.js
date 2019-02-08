@@ -4,16 +4,16 @@ var ApiHandler = function(){
     return apiCall(search);
   }
 
-  function apiCall(search){
+  function apiCall(search, searchType){
     return $.ajax({
       method: 'GET',
-      url: "https://www.googleapis.com/books/v1/volumes?q=" + searchFormat() + styleSearch(search) + resultsIndex(),
+      url: "https://www.googleapis.com/books/v1/volumes?q=" + searchFormat(searchType) + styleSearch(search) + resultsIndex(),
       datatype: "json"
     })
   }
 
-  function searchFormat(){
-    var callType = $('#active-search').text();
+  function searchFormat(callType){
+    // var callType = $('#active-search').text();
     switch(callType){
       case 'General':
         return '';
