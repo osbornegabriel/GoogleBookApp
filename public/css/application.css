@@ -70,5 +70,9 @@ p{
 }
 
 .search-bar{
-  padding-bottom: 12px;
+  padding-bottom: 10px;
+}
+
+#results-index{
+  padding-top: 10px;
 }

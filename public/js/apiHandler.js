@@ -6,7 +6,6 @@ var ApiHandler = function(){
 
   function apiCall(search, searchType){
     var url = "https://www.googleapis.com/books/v1/volumes?q=" + searchFormat(searchType) + styleSearch(search) + resultsIndex();
-    console.log(url);
     return $.ajax({
       method: 'GET',
       url: url,
