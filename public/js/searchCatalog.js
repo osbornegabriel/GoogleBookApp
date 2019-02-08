@@ -34,19 +34,26 @@ var SearchCatalog = function(){
 
   function updateBookSearch(){
     var search = $('#search').val();
-    try {
-      if (helper.validSearch(search)){
-        apiHandler.gbookSearch(search).done(function(response){
-          resetResults();
-          response.totalItems > 0 ? showResults(response) : noResults(search);
-        }).fail(function(failResponse){
-          console.log("Error: Google API did not respond with book data");
-          console.log("Response: " + failResponse);
-        })
-      }
-    } catch {
+    var searchType = $('#active-search').text();
+    if (helper.validSearch(search)){
+      try {
+        runSearch(search, searchType);
+      } catch {
       console.log("Error: Api call failed");
+      }
     }
+  }
+
+  function runSearch(search, searchType){
+    apiHandler.gbookSearch(search, searchType)
+    .done(function(response){
+      resetResults();
+      response.totalItems > 0 ? showResults(response) : noResults(search);
+    })
+    .fail(function(failResponse){
+      console.log("Error: Google API did not return search info");
+      console.log("Response: " + failResponse);
+    })
   }
 
   function showResults(bookList){
