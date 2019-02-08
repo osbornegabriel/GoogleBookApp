@@ -21,11 +21,10 @@ var SearchCatalog = function(){
   }
 
   function scroll(indexChange){
-      var index = $('#results-index').attr('data-index');
-      newIndex = parseInt(index) + indexChange;
-      $('#results-index').attr('data-index', newIndex);
+      updateDataIndex(indexChange);
       updateBookSearch();
-      helper.scrollTop();// need to come back to this, so scrollTop doesn't not resolve prior to the booksearch being updated
+      helper.scrollTop();
+      // I experimented with ways to have the scrollTop activate after the updated search, but visually have not yet to find a result I preferred over this default of the scrollTop script resolving prior to updateBookSearch
   }
 
   function setActiveSearch(searchChoice){
@@ -89,6 +88,18 @@ var SearchCatalog = function(){
     helper.reset('#results-scroll');
   }
 
+  function updateDataIndex(indexChange){
+    var index = $('#results-index').attr('data-index');
+    newIndex = parseInt(index) + indexChange;
+    $('#results-index').attr('data-index', newIndex);
+  }
+
+  function updateResultsIndex(){
+    var index = $('#results-index').attr('data-index');
+    var indexInfo = (index / 10) + 1;
+    $('#results-index').html("<p>Page " + indexInfo + " of Results</p>");
+  }
+
   function updateResultsScroll(totalResults){
     var indexTabs = '';
     var index = $('#results-index').attr('data-index');
@@ -99,12 +110,6 @@ var SearchCatalog = function(){
       indexTabs += "<button class='next'>Next</button>";
     }
     $('#results-scroll').html(indexTabs);
-  }
-
-  function updateResultsIndex(){
-    var index = $('#results-index').attr('data-index');
-    var indexInfo = (index / 10) + 1;
-    $('#results-index').html("<p>Page " + indexInfo + " of Results</p>");
   }
 
 }
