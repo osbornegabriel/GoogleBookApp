@@ -1,19 +1,20 @@
 var ApiHandler = function(){
 
-  this.gbookSearch = function(search){
-    return apiCall(search);
+  this.gbookSearch = function(search,searchType){
+    return apiCall(search,searchType);
   }
 
   function apiCall(search, searchType){
+    var url = "https://www.googleapis.com/books/v1/volumes?q=" + searchFormat(searchType) + styleSearch(search) + resultsIndex();
+    console.log(url);
     return $.ajax({
       method: 'GET',
-      url: "https://www.googleapis.com/books/v1/volumes?q=" + searchFormat(searchType) + styleSearch(search) + resultsIndex(),
+      url: url,
       datatype: "json"
     })
   }
 
   function searchFormat(callType){
-    // var callType = $('#active-search').text();
     switch(callType){
       case 'General':
         return '';
