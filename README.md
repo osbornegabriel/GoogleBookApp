@@ -14,9 +14,6 @@ Some future steps I wish to take for further development of this project:
 1) Testing:
 I seriously struggled with how best to even begin testing an interactive single-page application. Creating working testing I believe is the most crucial step forward in improving this app, as this is a glaring issue.
 
-2) Decoupling Code From Dom:
-This was part of where I received feedback on my app.
-
 2) General Styling:
 I have the foundation of the aesthetic I wished for this app. However, there's much room for improvement in the layout used for displaying query results to the user.
 
